@@ -1,4 +1,3 @@
-# Next.js-14-study
 
 <br>
 
