@@ -1,7 +1,5 @@
 # Next.js-14-study
 
-Next.js 14 스터디
-
 <br>
 
 ## 과제 방식
