@@ -28,7 +28,7 @@
 - 애플리케이션 안의 여러 컴포넌트들에 전해줘야 하는 props의 경우 (예를 들면 선호 로케일, UI 테마) 이 과정이 번거로울 수 있습니다.
 - context를 이용하면, 트리 단계마다 명시적으로 props를 넘겨주지 않아도 많은 컴포넌트가 이러한 값을 공유하도록 할 수 있습니다.
 
-####
+```ruby
 class App extends React.Component {
   render() {
     return <Toolbar theme="dark" />;
@@ -52,9 +52,9 @@ class ThemedButton extends React.Component {
     return <Button theme={this.props.theme} />;
   }
 }
-####
+```
 
-####
+```ruby
 // context를 사용하면 모든 컴포넌트를 일일이 통하지 않고도
 // 원하는 값을 컴포넌트 트리 깊숙한 곳까지 보낼 수 있습니다.
 // light를 기본값으로 하는 테마 context를 만들어 봅시다.
@@ -91,11 +91,11 @@ class ThemedButton extends React.Component {
     return <Button theme={this.context} />;
   }
 }
-####
+```
 
 ### 강의에서의 Provider 정의
 
-####
+```ruby
 "use client"; // 클라이언트 컴포넌트로 선언 (어디서든 사용 가능)
 
 import { ReactNode, createContext, useState } from "react";
@@ -117,7 +117,7 @@ export default function TabProvider({ children }: Props) {
     </TabContext.Provider>
   );
 }
-####
+```
 
 ## 3. classnames로 클래스 합성하기
 
