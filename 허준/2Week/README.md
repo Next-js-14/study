@@ -1,0 +1,4 @@
+- useSelectedLayoutSegment: 첫번째 depth의 폴더명
+- useSelectedLayoutSegments: 2개 depth 이상으로 사용하고 싶을때 ['user', 'tag']와 같이 사용됨
+- createContext, TabContext.Provider: context를 children에게 모두 적용하고 싶을때 사용
+- npmtrends: classnams, clsx 비교하여 사용자가 많은 lib를 고려할것
