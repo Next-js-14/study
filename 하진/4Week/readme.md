@@ -110,8 +110,12 @@ form 데이터의 name으로 데이터를 직접 가져올 수 있다.
 
 ## 쿠키 - credentials 설정이 왜 필요한가?
 
-현재 클라이언트 서버는
 쿠키가 있어야만 로그인 유무를 알 수 있다.
+하지만 브라우저가 제공하는 요청 API는 브라우저의 쿠키와 같은 인증과 관련된 데이터를 요청 데이터, 또는 응답 데이터에 담지 않는다.
+요청과 응답에 쿠키를 포하하고 싶다면 `withCredentials` 옵션을 사용.
+
+현재 클라이언트는 localhost:3000, 서버는 localhost:9090.
+_이때 CORS 에러가 발생한다_
 클라이언트나 서버나 둘다 Credentials를 true로 설정해야한다.
 
 표준 CORS요청은 기본적으로 쿠키를 설정하거나 보낼 수 없다.
@@ -142,3 +146,38 @@ fetch("url", {
   credentials: "include", // 클라이언트와 서버가 통신할때 쿠키 값을 공유하겠다는 설정
 });
 ```
+
+### 서버에서는
+
+서버에서도 설정이 필요하다.
+만일 서버에서 별도의 처리 없이 클라이언트만 withCredentials으로 서버에 cors 요청하게 되면 모두 거부된다.
+
+- node일 경우
+  서버에 response 헤더(Header) 값으로 Access-Control 설정을 해준다.
+
+  ```js
+  response.setHeader("Access-Control-Allow-origin", "*"); // 모든 출처(orogin)을 허용
+  response.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  ); // 모든 HTTP 메서드 허용
+  response.setHeader("Access-Control-Allow-Credentials", "true"); // 클라이언트와 서버 간에 쿠키 주고받기 허용
+  ```
+
+- express일 경우
+
+```js
+const express = require("express");
+const cors = require("cors");
+
+const app = express();
+
+app.use(
+  cors({
+    origin: "*", // 출처 허용 옵션
+    credential: "true", // 사용자 인증이 필요한 리소스(쿠키 ..등) 접근
+  })
+);
+```
+
+현재 우리가 이와 같은 경우
